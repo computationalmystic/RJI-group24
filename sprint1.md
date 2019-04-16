@@ -8,11 +8,14 @@ Functional Requirements
 ○	Users can search a specific rating of graded photos (i.e. 7-10).
 3.	UploadPicUseCase
 ○	Photographers can upload folder of photos to the database.
-Database Design
-ERD 
 
+Database Design
+
+ERD 
+![](schema.png)
 
 DDL
+
 CREATE TABLE `Has` (
   `Title` varchar(60) NOT NULL,
   `Username` varchar(24) NOT NULL

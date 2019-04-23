@@ -27,6 +27,11 @@ Classifier-
 	We are using the idealo image assessment. Once the photo is uploaded to the server, we will run the photo through the 
   classifier then get back the score and send it to the database with the path to the photo. Like I said earlier this
   probably our biggest issue right now. We have docker on the server, we just do not know how exactly to send the uploaded 
-  photos to the classifier. Sophie is going to office hours monday for some help on that. 
+  photos to the classifier. Sophie went to office hours Friday from 8-10 then Monday from 3-4:30 to get help on that. She was 
+  able to get docker on the server and create a .sh file, but when trying to test the image quality assessment on the test 
+  photos, Sophie and Goggins both repeatedly ran into errors on their machines. The errors they were getting were "You must
+  give at least one requirement to install" and "Could not find a version that satisfies the requirement upgrade No matching 
+  distribution found for upgrade." After trying it a few more times in the next couple days, Sophie will probably go back to 
+  office hours to see if this error can be resolved.
   
   Will link photos in the wiki to these use cases. 

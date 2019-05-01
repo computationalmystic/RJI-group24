@@ -42,7 +42,7 @@ CREATE TABLE `Has` (
 CREATE TABLE `Photos` (
   `Picture` varchar(70) NOT NULL,
   `Title` varchar(255) NOT NULL,
-  `Date` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Score` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

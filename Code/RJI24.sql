@@ -54,7 +54,7 @@ CREATE TABLE `Photos` (
 
 CREATE TABLE `User` (
   `Username` varchar(24) NOT NULL,
-  `Password` varchar(24) NOT NULL,
+  `Password` varchar(255) NOT NULL,
   `Accesslevel` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

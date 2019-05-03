@@ -7,4 +7,4 @@ Explain the advantages and limitations of your choice.
 
 
 
-The image classifier technology that we used for our project is the idealo image-quality-assessment. Right now we are still using the default example classifiers because we are having issues with the photo grader to work on our server.
+The image classifier technology that we used for our project is the idealo image-quality-assessment. Right now we are still using the default example classifiers because we are having issues running the photo grader on our server.

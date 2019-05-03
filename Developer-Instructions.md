@@ -2,7 +2,7 @@ RJI Photo Grader
 
 Step one: go to http://ec2-18-222-50-172.us-east-2.compute.amazonaws.com/SoftwareDev/index.php
 
-Step two: To clear the library for your use, go to the Delete Tab and click the delete button. 
+Step two: Click log in, and then create user if you wanna make an account or you can just use username: "test" and password of: "pass" to login. 
 
 Step three: Go to the Upload tab, click choose files and select whatever files you would like to upload. 
 

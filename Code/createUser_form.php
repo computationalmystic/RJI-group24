@@ -4,31 +4,43 @@ header("Pragma:no-cache");
 header("Expires: 0");
 ?>
 
-<!DOCTYPE html>
-<!-- Created by Professor Wergeles for CS2830 at the University of Missouri -->
-<html>
-<head>
-	<title>Database Login</title>
-	
-   	<link href="jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet">
-    <script src="jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
-    <script src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-	<link href="app.css" rel="stylesheet" type="text/css">
-	<link href="final.css" rel="stylesheet" type="text/css">
-	<script src="final.js"></script>
-    <script>
+<!doctype html>
+
+<html lang="en"><head><title>Photo Grader</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon" type="image/x-icon" href="icon.ico" />
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee {font-size:200px}
+</style>
+	<script>
         $(function(){
             $("input[type=submit]").button();
         });
     </script>
 </head>
 <body id="loginbody">
-			<?php 
-			 require_once('navbar.php');
-			?>
-	
-    <div id="loginWidget" class="ui-widget">
-        <h1 class="ui-widget-header">Create User</h1>
+			<div class="w3-top">
+  <div class="w3-bar w3-red w3-card w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="index.php" class="w3-bar-item w3-button w3-padding-large">Home</a>
+    <a href="About.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">About</a>
+  </div>
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a href="index.php" class="w3-bar-item w3-button w3-padding-large">Home</a>
+    <a href="About.php" class="w3-bar-item w3-button w3-padding-large">About</a>
+  </div>
+</div>
+<header class="w3-container w3-red w3-center" style="padding:128px 16px">
+	<h1 class="ui-widget-header">Create User</h1>
         
         <?php
             if ($error) {
@@ -39,21 +51,21 @@ header("Expires: 0");
             }
 			
         ?>
+	
+</header>
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+    
+        
         
         
         <form action="createUser.php" method="POST">
             
             <input type="hidden" name="action" value="do_create">
+            
+			
             <div class="stack">
-				<label for="firstName">First name:</label>
-				<input type="text" id="firstName" name="firstName" class="ui-widget-content ui-corner-all"/>
-			</div>
-			<div class="stack">
-				<label for="lastName">Last name:</label>
-				<input type="text" id="LastName" name="lastName" class="ui-widget-content ui-corner-all"/>
-			</div>
-            <div class="stack">
-                <label for="username">User name:</label>
+                <label for="username">Username:</label>
                 <input type="text" id="username" name="username" class="ui-widget-content ui-corner-all" autofocus value="<?php print $username; ?>"/>
             </div>
             
@@ -73,8 +85,7 @@ header("Expires: 0");
         </form>
 		
     </div>
-	<?php 
-			 require_once('footer.php');
-			?>
+</div>
+	
 </body>
 </html>

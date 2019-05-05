@@ -21,18 +21,22 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="w3-top">
   <div class="w3-bar w3-red w3-card w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-    <a href="photoGrader.php" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
+    <a href="index.php" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
+      <a href="photoGrader.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Upload</a>
     <a href="view.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">View</a>
     <a href="delete.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Delete</a>
     <a href="About.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">About</a>
+      <a href="logout.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Logout</a>
   </div>
 
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-    <a href="photoGrader.php" class="w3-bar-item w3-button w3-padding-large">Home</a>
+    <a href="index.php" class="w3-bar-item w3-button w3-padding-large">Home</a>
+      <a href="photoGrader.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Upload</a>
       <a href="view.php" class="w3-bar-item w3-button w3-padding-large">View</a>
       <a href="delete.php" class="w3-bar-item w3-button w3-padding-large">Delete</a>
     <a href="About.php" class="w3-bar-item w3-button w3-padding-large">About</a>
+      <a href="logout.php" class="w3-bar-item w3-button w3-padding-large">Logout</a>
   </div>
 </div>
 
@@ -54,27 +58,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         
       <h5 class="w3-padding-32">This is a web application that grades photos based on their quality using the idealo image-quality-assessment</h5>
 <?php
-
-//	if(!session_start()) {
-//		// If the session couldn't start, present an error
-//		header("Location: error.php");
-//		exit;
-//	}
-//	
-//	
-//	// Check to see if the user has already logged in
-//	$loggedIn = empty($_SESSION['loggedin']) ? false : $_SESSION['loggedin'];
-//	
-//	if ($loggedIn) {
-//		header("Location: index.php");
-//		exit;
-//	}
-
-
-
-
-
-	
+	if(!session_start()){
+		echo "session didn't connect try again or contact developer.";
+	}
 
 if(isset($_POST["submit"])){
 	
@@ -86,8 +72,10 @@ if(isset($_POST["submit"])){
             $error = 'Error: ' . $mysqli->connect_errno . ' ' . $mysqli->connect_error;
 			echo "<p color=yellow>".$error."</p>";
             exit;
-        }
-	else{ echo "connected";}
+    }
+	else{ //
+		//echo "connected"
+    ;}
 	
 //	$connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 	$countfiles = count($_FILES['file']['name']);
@@ -140,19 +128,31 @@ if(move_uploaded_file($tmpPath, $target)) {
 	
 	
 	//Put grader
-	$score= $j++%10;
+	//$score= $j++%10;
+    
+    $score = shell_exec("bash ../../var/www/html/SoftwareDev/run_image_aesthetic.sh $title");
+ //   echo " score ". $score . " /10. ";
+     $score = substr($score, -7, -3);
+         //     echo " score ". $score . " /10. ";
+    //change the exact image name in the shell script to $title
+    //you may not need the ./ after the bash command sooo
+    
 	
-	
+	$user= $_SESSION['loggedin'];
 	
 	
     // Connects to your Database
-   $query = "INSERT INTO Photos(Picture, Title, Date, Score) VALUES ('$target', '$title', CURDATE(), '$score');";
+   $query = "INSERT INTO Photos(Picture, Title, Username, Date, Score) VALUES ('$target', '$title', '$user', CURDATE(), '$score');";
+	
+	
 	$result = $mysqli->query($query);
    // Writes the information to the database
 	
+	
+	
    if ($result) {
 	   
-		echo "picture uploaded";
+		//echo "picture uploaded";
 //	   echo "<img src=".title.
 	   echo "<table border-style=none  width='100%' >"; 
 	   	echo "<td width='350'>" . $title . "</td>"; 

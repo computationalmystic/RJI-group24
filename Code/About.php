@@ -19,18 +19,51 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="w3-top">
   <div class="w3-bar w3-red w3-card w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-    <a href="photoGrader.php" class="w3-bar-item w3-button w3-padding-large">Home</a>
+    <a href="index.php" class="w3-bar-item w3-button w3-padding-large">Home</a>
+      <a href="photoGrader.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Upload</a>
       <a href="view.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">View</a>
     <a href="delete.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Delete</a>
     <a href="About.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-white">About</a>
+      
+      <?php
+
+    if(!session_start()) {
+		 echo "Try again or Contact Developer";
+	}
+	$loggedIn = empty($_SESSION['loggedin']) ? false : $_SESSION['loggedin'];
+	if (!$loggedIn) {
+        echo "<a href='login.php' class='w3-bar-item w3-button w3-padding-large'>Login</a>";
+	} else {
+        echo "<a href='logout.php' class='w3-bar-item w3-button w3-padding-large'>Logout</a>";
+    }
+      
+    ?>
+      
+      
   </div>
 
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-    <a href="photoGrader.php" class="w3-bar-item w3-button w3-padding-large">Home</a>
+    <a href="index.php" class="w3-bar-item w3-button w3-padding-large">Home</a>
+      <a href="photoGrader.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Upload</a>
       <a href="view.php" class="w3-bar-item w3-button w3-padding-large">View</a>
     <a href="delete.php" class="w3-bar-item w3-button w3-padding-large">Delete</a>
     <a href="About.php" class="w3-bar-item w3-button w3-padding-large w3-white">About</a>
+      
+      <?php
+
+    if(!session_start()) {
+		 echo "Try again or Contact Developer";
+	}
+	$loggedIn = empty($_SESSION['loggedin']) ? false : $_SESSION['loggedin'];
+	if (!$loggedIn) {
+        echo "<a href='login.php' class='w3-bar-item w3-button w3-padding-large'>Login</a>";
+	} else {
+        echo "<a href='logout.php' class='w3-bar-item w3-button w3-padding-large'>Logout</a>";
+    }
+      
+    ?>
+      
   </div>
 </div>
 

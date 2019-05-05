@@ -1,3 +1,20 @@
+<?php
+	if(!session_start()) {
+		// If the session couldn't start, present an error
+		header("Location: error.php");
+		exit;
+	}
+	
+	
+	// Check to see if the user has already logged in
+	$loggedIn = empty($_SESSION['loggedin']) ? false : $_SESSION['loggedin'];
+	
+	if (!$loggedIn) {
+		header("Location: login.php");
+		exit;
+	}
+	
+?>
 <!doctype html>
 
 <html lang="en"><head><title>Photo Grader</title>
@@ -45,18 +62,22 @@ window.onload = function() { printValue('slide1', 'rangeValue1'); }
 <div class="w3-top">
   <div class="w3-bar w3-red w3-card w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-    <a href="photoGrader.php" class="w3-bar-item w3-button w3-padding-large">Home</a>
+    <a href="index.php" class="w3-bar-item w3-button w3-padding-large">Home</a>
+      <a href="photoGrader.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Upload</a>
     <a href="view.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-white">View</a>
     <a href="delete.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Delete</a>
     <a href="About.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">About</a>
+      <a href="logout.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Logout</a>
   </div>
 
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-    <a href="photoGrader.php" class="w3-bar-item w3-button w3-padding-large">Home</a>
+    <a href="index.php" class="w3-bar-item w3-button w3-padding-large">Home</a>
+      <a href="photoGrader.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Upload</a>
       <a href="view.php" class="w3-bar-item w3-button w3-padding-large w3-white">View</a>
     <a href="delete.php" class="w3-bar-item w3-button w3-padding-large">Delete</a>
     <a href="About.php" class="w3-bar-item w3-button w3-padding-large">About</a>
+      <a href="logout.php" class="w3-bar-item w3-button w3-padding-large">Logout</a>
   </div>
 </div>
 
@@ -88,8 +109,7 @@ window.onload = function() { printValue('slide1', 'rangeValue1'); }
 		
 		<h2>Search Results</h2>
 <?php
-		
-if(isset($_POST["search"])){
+		$user = $_SESSION['loggedin'];
 require_once 'db.conf';
         
          //Connect to the database
@@ -99,15 +119,51 @@ require_once 'db.conf';
 			echo $error;
             exit;
         }
+if(isset($_POST["download"])){
+	if(file_exists("ScoredPhotos.zip")){
+		unlink("ScoredPhotos.zip");
+	}
+	$zip = new ZipArchive(); 
+	
+	$zip_name = "ScoredPhotos.zip";
+	
+	if($zip->open($zip_name, ZIPARCHIVE::CREATE)!==TRUE){
+		echo "Sorry ZIP creation failed at this time"; 
+	}
+	
+	$query = "SELECT Title, Score FROM Photos WHERE Score >=". $_POST['range']." AND Username= '$user' ORDER BY Score DESC";
+	
+	$result = $mysqli->query($query);
+	
+	while ($row = $result->fetch_assoc()) {
+		$zip->addFile($row['Title'], "(".$row['Score'].")".$row['Title']); 
 		
-	$query = "SELECT Title, Score FROM Photos WHERE Score >=". $_POST['slider']." ORDER BY Score DESC";
+		
+	}
+	
+	$zip->close();
+	
+	if(file_exists($zip_name)){
+		
+	echo "<a href='".$zip_name."' download>Click to download zip file.</a>";
+		
+	}
+    
+}
+
+		
+if(isset($_POST["search"])){
+
+		
+	$query = "SELECT Title, Score FROM Photos WHERE Score >=". $_POST['slider']." AND Username = '$user' ORDER BY Score DESC";
 	
 	
 	 $result = $mysqli->query($query);
 	 echo "<h5>".$result->num_rows. " results</h5>";
 		if($result->num_rows !=0){
 			echo "<form action='' method='post'>
-					<input type='submit' name='download' value='Download'>
+					<input type='submit' name='download' value='Create Zip'>
+					<input type='hidden' name='range' value='".$_POST['slider']."'>
 					</form>
 			";
 		}

@@ -25,8 +25,7 @@
 	}
 	
 	function create_user() {
-		$firstName = empty($_POST['firstName']) ? '' : $_POST['firstName'];
-		$lastName = empty($_POST['lastName']) ? '' : $_POST['lastName'];
+		
 		$username = empty($_POST['username']) ? '' : $_POST['username'];
 		$password = empty($_POST['password']) ? '' : $_POST['password'];
 		$confirmPass = empty($_POST['confirmPass']) ? '' : $_POST['confirmPass'];
@@ -56,7 +55,7 @@
         $password = sha1($password); 
         
         // Build query
-		$query = "INSERT into users (username, userpassword, firstname, lastname) values ('$username', '$password', '$firstName', '$lastName');";
+		$query = "INSERT into User (Username, Password, Accesslevel) values ('$username', '$password', 0);";
 		
 //         Sometimes it's nice to print the query. That way you know what SQL you're working with.
 //        print $query;

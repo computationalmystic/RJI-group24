@@ -1,3 +1,16 @@
+<?php
+
+	if(!session_start()) {
+		header("Location: error.php");
+		exit;
+	}
+	$loggedIn = empty($_SESSION['loggedin']) ? false : $_SESSION['loggedin'];
+	if (!$loggedIn) {
+		header("Location: login.php");
+		exit;
+	}
+?>
+
 <!doctype html>
 
 <html lang="en"><head><title>Photo Grader</title>
@@ -19,18 +32,22 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="w3-top">
   <div class="w3-bar w3-red w3-card w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-    <a href="photoGrader.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Home</a>
-    <a href="view.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">View</a>
+    <a href="index.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Home</a>
+      <a href="photoGrader.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Upload</a>
+      <a href="view.php" class="w3-bar-item w3-button w3-padding-large">View</a>
     <a href="delete.php" class="w3-bar-item w3-button w3-padding-large w3-white">Delete</a>
     <a href="About.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">About</a>
+      <a href="logout.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Logout</a>
   </div>
 
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-    <a href="photoGrader.php" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
+    <a href="index.php" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
+      <a href="photoGrader.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Upload</a>
     <a href="view.php" class="w3-bar-item w3-button w3-padding-large">View</a>
      <a href="delete.php" class="w3-bar-item w3-button w3-padding-large">Delete</a>
     <a href="About.php" class="w3-bar-item w3-button w3-padding-large">About</a>
+      <a href="logout.php" class="w3-bar-item w3-button w3-padding-large">Logout</a>
   </div>
 </div>
 
@@ -42,6 +59,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 		<input type="submit" name="submit" value="DELETE">
 		</form>
         <?php
+		
 		if(isset($_POST['submit'])){
 			
 		require_once 'db.conf';
@@ -53,21 +71,25 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 			echo "<p color=red>".$error."</p>";
             exit;
         }
-	
+	$user= $_SESSION['loggedin'];
 		
-	$query = "SELECT Title FROM Photos";
+	$query = "SELECT * FROM Photos WHERE Username = '$user'";
+			
 	$result = $mysqli->query($query);
 			
 	if($result->num_rows > 0){
+		
+		
 	while ($row = $result->fetch_assoc()) {
 		if(!$row){
 			echo "<p> There are no photos to delte.</p>";
 		}
-		echo "<p>" . $row['Title'] . "</p>"; 
+		echo "<p>" . $row['Title'] . " was deleted</p>"; 
 		unlink($row['Title']);
 		
 		}
-			$query = "Delete From Photos";
+			$query = "Delete From Photos WHERE Username = '$user';";
+			
 			$result = $mysqli->query($query);
 			if(!$result){
 			$error = 'Error: ' . $result->connect_errno . ' ' . $result->connect_error;

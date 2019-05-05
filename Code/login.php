@@ -5,17 +5,17 @@
 	// Here we are using sessions to propagate the login
 	// http://us3.php.net/manual/en/intro.session.php
 
-    // HTTPS redirect
+//     HTTPS redirect
 //    if ($_SERVER['HTTPS'] !== 'on') {
 //		$redirectURL =  $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 //		header("Location: $redirectURL");
 //		exit;
 ////		'https://' .
 //	}
-	
 	// http://us3.php.net/manual/en/function.session-start.php
 	if(!session_start()) {
 		// If the session couldn't start, present an error
+        echo "Hello world";
 		header("Location: error.php");
 		exit;
 	}
@@ -23,26 +23,22 @@
 	
 	// Check to see if the user has already logged in
 	$loggedIn = empty($_SESSION['loggedin']) ? false : $_SESSION['loggedin'];
-	
-	if ($loggedIn) {
-		header("Location: index.php");
-		exit;
-	}
-	
+    
+    if ($loggedIn){
+        header("Location: index.php");
+        exit;
+    }
 	
 	$action = empty($_POST['action']) ? '' : $_POST['action'];
-	
 	if ($action == 'do_login') {
 		handle_login();
 	} else {
 		login_form();
 	}
-	
 	function handle_login() {
 		$username = empty($_POST['username']) ? '' : $_POST['username'];
 		$password = empty($_POST['password']) ? '' : $_POST['password'];
 	
-        
         
         // We added the test user to our users table
         // INSERT INTO users (username, password, addDate, changeDate) VALUES ('test', 'pass', NOW(), NOW());
@@ -52,14 +48,12 @@
         
         // Connect to the database
         $mysqli = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-        
         // Check for errors
         if ($mysqli->connect_error) {
             $error = 'Error: ' . $mysqli->connect_errno . ' ' . $mysqli->connect_error;
 			require "login_form.php";
             exit;
         }
-        
         // http://php.net/manual/en/mysqli.real-escape-string.php
         $username = $mysqli->real_escape_string($username);
         $password = $mysqli->real_escape_string($password);
@@ -68,7 +62,7 @@
         $password = sha1($password); 
         
         // Build query
-		$query = "SELECT id FROM users WHERE username = '$username' AND userpassword = '$password'";
+		$query = "SELECT Username FROM User WHERE Username = '$username' AND Password = '$password'";
 		
 //         Sometimes it's nice to print the query. That way you know what SQL you're working with.
 //        print $query;
@@ -76,7 +70,6 @@
         
 		// Run the query
 		$mysqliResult = $mysqli->query($query);
-		
         // If there was a result...
         if ($mysqliResult) {
             // How many records were returned?
@@ -92,6 +85,7 @@
   		    if ($match == 1) {
                 $_SESSION['loggedin'] = $username;
                 header("Location: index.php");
+//                header("Location: photoGrader.php");
                 exit;
             }
             else {

@@ -36,7 +36,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       <a href="photoGrader.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Upload</a>
       <a href="view.php" class="w3-bar-item w3-button w3-padding-large">View</a>
     <a href="delete.php" class="w3-bar-item w3-button w3-padding-large w3-white">Delete</a>
-    <a href="About.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">About</a>
       <a href="logout.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Logout</a>
   </div>
 
@@ -46,7 +45,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       <a href="photoGrader.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Upload</a>
     <a href="view.php" class="w3-bar-item w3-button w3-padding-large">View</a>
      <a href="delete.php" class="w3-bar-item w3-button w3-padding-large">Delete</a>
-    <a href="About.php" class="w3-bar-item w3-button w3-padding-large">About</a>
       <a href="logout.php" class="w3-bar-item w3-button w3-padding-large">Logout</a>
   </div>
 </div>
@@ -109,6 +107,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </header>
 
 <!-- First Grid -->
+<!--
 <div class="w3-row-padding w3-padding-64 w3-container">
   <div class="w3-content">
     <div class="w3-twothird">
@@ -124,7 +123,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   </div>
 </div>
 
-<!-- Second Grid -->
+ Second Grid 
 <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
   <div class="w3-content">
     <div class="w3-third w3-center">
@@ -139,6 +138,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     </div>
   </div>
 </div>
+-->
 
 <div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
    <h1 class="w3-margin w3-xlarge">Created By: Brendan Spinks, Sophie Nedelco, and Cody Polton</h1>

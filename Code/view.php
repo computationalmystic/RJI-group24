@@ -66,7 +66,6 @@ window.onload = function() { printValue('slide1', 'rangeValue1'); }
       <a href="photoGrader.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Upload</a>
     <a href="view.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-white">View</a>
     <a href="delete.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Delete</a>
-    <a href="About.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">About</a>
       <a href="logout.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Logout</a>
   </div>
 
@@ -76,7 +75,6 @@ window.onload = function() { printValue('slide1', 'rangeValue1'); }
       <a href="photoGrader.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Upload</a>
       <a href="view.php" class="w3-bar-item w3-button w3-padding-large w3-white">View</a>
     <a href="delete.php" class="w3-bar-item w3-button w3-padding-large">Delete</a>
-    <a href="About.php" class="w3-bar-item w3-button w3-padding-large">About</a>
       <a href="logout.php" class="w3-bar-item w3-button w3-padding-large">Logout</a>
   </div>
 </div>
@@ -196,20 +194,7 @@ if(isset($_POST["search"])){
 </div>
 
 <!-- Second Grid -->
-<div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
-  <div class="w3-content">
-    <div class="w3-third w3-center">
-      <i class="fa fa-coffee w3-padding-64 w3-text-red w3-margin-right"></i>
-    </div>
 
-    <div class="w3-twothird">
-      <h1>Lorem Ipsum</h1>
-      <h5 class="w3-padding-32"></h5>
-
-      <p class="w3-text-grey"></p>
-    </div>
-  </div>
-</div>
 
 <div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
     <h1 class="w3-margin w3-xlarge">Created By: Brendan Spinks, Sophie Nedelco, and Cody Polton</h1>

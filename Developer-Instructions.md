@@ -77,11 +77,6 @@ AWS server config
   
       8.1 download RJI webcode
         git clone https://github.com/computationalmystic/RJI-group24/tree/master/Code
-      8.2 upload webcode to AWS server
-          (option) use winSCP tool to upload code to path: /usr/java/tomcat/webapps
-          (option) use Filezilla to upload the code to path: /usr/java/tomcat/webapps
-      8.3 create database and tables in mysql
+      8.2 create database and tables in mysql
           use databaseschema file:
           https://github.com/computationalmystic/RJI-group24/blob/master/Code/RJI24.sql
-      8.4 start tomcat
-          ./startup.sh

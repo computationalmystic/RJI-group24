@@ -75,7 +75,7 @@ AWS server config
         service mysql start
   8.Webcode deploy
   
-      8.1 download RJI webcode
+      8.1 download RJI webcode and upload to AWS server
         git clone https://github.com/computationalmystic/RJI-group24/tree/master/Code
       8.2 create database and tables in mysql
           use databaseschema file:
